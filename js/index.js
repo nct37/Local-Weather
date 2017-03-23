@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var today = new Date();
     var hours = today.getHours();
     var date = today.toLocaleDateString();
-    alert("Must be run over https:// at its current state, thank you!");
+
     window.navigator.geolocation.getCurrentPosition(getLocationWeather);
 
     function getLocationWeather(position) {
