@@ -60,8 +60,8 @@
   100% { transform: rotate(360deg); }
 }
 body {
-    background-position: center center fixed;
-    background-repeat: no-repeat;
+    background: no-repeat center center fixed;
+    /*background-repeat: no-repeat;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -141,4 +141,3 @@ body {
     font-size: 1.5em;
     text-transform: uppercase;
 }
-
