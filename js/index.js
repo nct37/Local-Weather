@@ -53,8 +53,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             showCondition: function() {
                 var addCondition = document.createElement('div');
                 addCondition.id = 'condition';
+                var windIcon = "<i class='wi wi-wind wi-towards-" + windDirection.toLowerCase() + "'></i>";
 
-                document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + clouds + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windSpeed + ".</p>";
+                document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + clouds + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windSpeed + ". " + windIcon + "</p>";
+                console.log(addCondition);
             },
             showTemp: function() {
 

@@ -134,6 +134,9 @@ body {
     text-shadow: 2px 3px 5px black;
     text-align: center;
 }
+.wi-wind {
+    font-size: 1.7em;
+}
 #condition-detail {
     color: yellow;
     text-shadow: 2px 4px 10px black;
