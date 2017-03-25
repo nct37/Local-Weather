@@ -29,11 +29,11 @@
 body {
     background: no-repeat center center fixed;
     /*background-repeat: no-repeat;*/
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    size: fill;
-    background-size: cover;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    size: fill !important;
+    background-size: cover !important;
     min-height: 500px;
     max-width: 100%;
     margin: auto;
@@ -45,7 +45,7 @@ body {
     margin: 1%;
 }
 .temp-container {
-    margin-top: 3%;
+    margin-top: 0;
 }
 #location {
     color: white;
@@ -71,7 +71,7 @@ body {
 }
 #temp {
     color: yellow;
-    font-size: 7.6em;
+    font-size: 7em;
     text-shadow: 2px 4px 8px black;
     margin: auto;
 }
@@ -82,7 +82,7 @@ body {
     font-size: 2.1em;
     font-family: monospace;
     height: 10px;
-    margin: 0 30%;
+    margin: 0 34px 0 30%;
     text-shadow: 2px 4px 8px black;
 }
 #changeMeasurement:hover {
@@ -106,15 +106,33 @@ body {
     text-shadow: 0px -3px 3px black;
     text-align: center;
 }
+@keyframes slidein {
+    from {
+        margin-left: 30%;
+    }
+    to {
+        margin-left: -10%;
+    }
+}
 .wi-wind {
     font-size: 1.7em;
 }
 .wi-day-cloudy, .wi-day-sunny, .wi-cloudy {
-    font-size: 3.5em;
+    font-size: 3.9em;
     color: white;
     text-shadow: 0px 6px 10px black;
     margin: 0 0 auto auto;
     padding: 0;
+}
+.wi-day-sunny {
+    -webkit-animation: spin 15s linear infinite;
+    animation: spin 15s linear infinite;
+}
+.wi-day-cloudy, .wi-cloudy{
+    animation-duration: 4s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 #condition-detail {
     color: yellow;
@@ -129,6 +147,9 @@ body {
         font-size: 150%;
         margin: 0px;
     }
+    #changeMeasurement {
+        margin-right: 180px;
+    }
 }
 @media screen and (min-width: 1024px) {
     body {
@@ -139,9 +160,6 @@ body {
     .temp-container {
         display: flex;
         margin-top: 7%;
-    }
-    .display-container {
-        margin: 0px;
     }
     #condition {
         margin: auto;

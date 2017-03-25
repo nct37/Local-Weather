@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 addCondition.id = 'condition';
                 var windIcon = "<i class='wi wi-wind wi-towards-" + windDirection.toLowerCase() + "'></i>";
 
-                document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + cloudCover + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windSpeed + ". " + windIcon + "</p";
+                document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + cloudCover + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windIcon + " " + windSpeed + ". " + "</p";
             },
             showClouds: function() {
                 var cloudIcon;
@@ -170,9 +170,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         displayData.displayBackgroundVisual();
         displayData.showLocation();
         displayData.showTemp();
+        displayData.showClouds();
         displayData.showCondition();
         displayData.toggleMeasurement();
-        displayData.showClouds();
     }
 });
 //Time
