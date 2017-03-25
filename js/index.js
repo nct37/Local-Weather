@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function getLocationWeather(position) {
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
-        console.log(lat + " " + lon);
+
         //Possible refactor to address browser geo location requirement of https:// connection. Codepen doesn't automatically load in https://---connect via a secondary, albeit a less accurate source if user doesn't actively view in https:// or if user denies location request.
 
         //var url = "https://api.apixu.com/v1/current.json?key=e265c4ee836f4d1ca6132647172001&q=" + lat + " " + lon;
@@ -42,43 +42,64 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var tempC = Math.floor(data.current.temp_c) + "&deg;C";
         var humidity = data.current.humidity + "%";
         var windDirection = data.current.wind_dir;
-        var clouds = data.current.cloud + "%";
+        var clouds = data.current.cloud;
         var windSpeed = Math.floor(data.current.wind_mph) + "mph";
         var measurement = document.getElementById("temp");
+        var newMeasurement = tempF;
+        var toggle = document.getElementById("changeMeasurement");
+
         //Object to display data on the page
         var displayData = {
             showLocation: function() {
                 document.getElementById("location").innerHTML = location;
             },
             showCondition: function() {
-                var addCondition = document.createElement('div');
+                var cloudCover = clouds + "%";
+                var addCondition = document.createElement("div");
                 addCondition.id = 'condition';
                 var windIcon = "<i class='wi wi-wind wi-towards-" + windDirection.toLowerCase() + "'></i>";
 
-                document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + clouds + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windSpeed + ". " + windIcon + "</p>";
-                console.log(addCondition);
+                document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + cloudCover + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windSpeed + ". " + windIcon + "</p";
+            },
+            showClouds: function() {
+                var cloudIcon;
+                var cloudIconElement;
+
+                if (clouds >= 0 && clouds < 15) {
+                    cloudIcon = "'wi wi-day-sunny'";
+                } else if (clouds < 80 && clouds > 15) {
+                    cloudIcon = "'wi wi-day-cloudy'";
+                } else {
+                    cloudIcon = "'wi wi-cloudy'";
+                }
+
+                cloudIconElement = "<i class=" + cloudIcon + "></i>";
+
+
+                document.getElementById("cloudCoverage").innerHTML = cloudIconElement;
+
             },
             showTemp: function() {
 
-                document.getElementById("temp").innerHTML = tempF;
+                measurement.innerHTML = tempF;
             },
             toggleMeasurement: function() {
-                var toggle = document.getElementById("changeMeasurement");
+                //Toggle Fahrenheit and Celsius
                 toggle.innerHTML = "&deg;C";
 
                 toggle.addEventListener("mousedown", function() {
 
-                    if (measurement == tempC) {
-                        measurement = tempF;
+                    if (newMeasurement == tempC) {
+                        newMeasurement = tempF;
                         this.innerHTML = "&deg;C";
                     } else {
-                        measurement = tempC;
+                        newMeasurement = tempC;
                         this.innerHTML = "&deg;F";
                     }
 
-                    document.getElementById("temp").innerHTML = measurement;
+                    measurement.innerHTML = newMeasurement;
                 });
-            }(),
+            },
             displayBackgroundVisual: function() {
                 //condition = "thunder"; //- test background
                 var pageBackground = document.getElementById("weather");
@@ -140,7 +161,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     greeting = "Good night!";
                 }
 
-                document.getElementById("greeting").innerHTML = greeting;
+                var setGreeting = document.getElementById("greeting");
+                setGreeting.innerHTML = greeting;
             }
         };
 
@@ -149,6 +171,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         displayData.showLocation();
         displayData.showTemp();
         displayData.showCondition();
+        displayData.toggleMeasurement();
+        displayData.showClouds();
     }
 });
 //Time

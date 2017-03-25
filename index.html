@@ -8,24 +8,27 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/weather-icons-wind.min.css">
+    <link rel="stylesheet" href="css/weather-icons.min.css">
     <script src="js/index.js"></script>
 </head>
 
 <body id="weather">
     <div id="loader"></div>
     <div class="display-container">
-        <h1 id="location"></h1>
-        <h3 id="greeting"></h3>
-        <div id="date"></div>
-        <span id="time"></span>
+        <div class="greeting-container">
+            <h1 id="location"></h1>
+            <h3 id="greeting"></h3>
+            <div id="date"></div>
+            <span id="time"></span>
+        </div>
         <div class="temp-container">
             <div id="temp">
             </div>
             <span id="changeMeasurement" type="button" title="Toggle Celsius and Fahrenheit"></span>
+            <div id="cloudCoverage">
+            </div>
         </div>
     </div>
 </body>
-
-<!--<script src="js/index.js"></script>-->
 
 </html>

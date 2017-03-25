@@ -2,39 +2,6 @@
     margin: 0px;
     /*border: 1px red solid;*/
 }
-@media screen and (min-width: 480px) {
-    body {
-        font-size: 150%;
-        margin: 0px;
-    }
-}
-@media screen and (min-width: 1024px) {
-    body {
-        font-size: 175%;
-        width: 100%;
-        margin: 0px auto;
-    }
-    .temp-container {
-        display: flex;
-        margin-top: 6%;
-    }
-    .display-container {
-        margin: 0px;
-    }
-    #condition {
-        margin: 0px;
-        max-width: 33%;
-    }
-}
-@media screen and (min-width: 1700px) {
-    body {
-        font-size: 200%;
-        max-width: 1700px;
-    }
-    .temp-container {
-        margin-top: 5%;
-    }
-}
 #loader {
   position: absolute;
   left: 50%;
@@ -75,7 +42,10 @@ body {
     text-align: center;
 }
 .display-container {
-    margin: 3%;
+    margin: 1%;
+}
+.temp-container {
+    margin-top: 3%;
 }
 #location {
     color: white;
@@ -108,20 +78,22 @@ body {
 #changeMeasurement {
     color: yellow;
     display: block;
-    text-align: center;
+    text-align: right;;
     font-size: 2.1em;
     font-family: monospace;
+    height: 10px;
+    margin: 0 30%;
     text-shadow: 2px 4px 8px black;
 }
 #changeMeasurement:hover {
-    color: white;
+    color: rgb(33, 247, 235);
     cursor: pointer;
     text-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 1);
 }
 #condition {
     color: #77f957;
     display: inline-block;
-    border-radius: 50px;
+    border-radius: 90px;
     box-shadow: 2px 3px 8px black;
     font-family: monospace;
     font-size: 1.2em;
@@ -130,17 +102,78 @@ body {
     line-height: 150%;
     background: rgba(10, 10, 10, 0.4);
     margin: 3% auto 3% auto;
-    padding: 2% 5% 2% 5%;
-    text-shadow: 2px 3px 5px black;
+    padding: 3%;
+    text-shadow: 0px -3px 3px black;
     text-align: center;
 }
 .wi-wind {
     font-size: 1.7em;
 }
+.wi-day-cloudy, .wi-day-sunny, .wi-cloudy {
+    font-size: 3.5em;
+    color: white;
+    text-shadow: 0px 6px 10px black;
+    margin: 0 0 auto auto;
+    padding: 0;
+}
 #condition-detail {
     color: yellow;
-    text-shadow: 2px 4px 10px black;
+    text-shadow: 0px -3px 3px black;
     text-align: center;
     font-size: 1.5em;
     text-transform: uppercase;
+    margin: auto;
 }
+@media screen and (min-width: 480px) {
+    body {
+        font-size: 150%;
+        margin: 0px;
+    }
+}
+@media screen and (min-width: 1024px) {
+    body {
+        font-size: 175%;
+        width: 100%;
+        margin: 0px auto;
+    }
+    .temp-container {
+        display: flex;
+        margin-top: 7%;
+    }
+    .display-container {
+        margin: 0px;
+    }
+    #condition {
+        margin: auto;
+        max-width: 33%;
+    }
+    #temp {
+        margin: auto;
+    }
+    #changeMeasurement {
+    margin: auto;
+    text-align: center;
+    }
+    #condition {
+        margin: auto;
+    }
+}
+@media screen and (min-width: 1700px) {
+    body {
+        font-size: 200%;
+        max-width: 1700px;
+    }
+    .temp-container {
+        margin-top: 5%;
+    }
+    #temp {
+        margin: auto;
+    }
+    #changeMeasurement {
+        margin: auto auto 5% -2%;
+        width: auto;
+    }
+    #condition {
+        margin: auto;
+    }
+};
