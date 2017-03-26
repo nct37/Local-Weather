@@ -157,12 +157,15 @@ body {
         width: 100%;
         margin: 0 auto 2% 0;
     }
+    .display-container{
+      margin-top: 0;
+    }
     .greeting-container {
-        margin-top: 2%;
+        margin-top: auto;
     }
     .temp-container {
         display: flex;
-        margin-top: 2%;
+        margin-top: 4%;
     }
     #condition {
         margin: auto auto -15px auto;
