@@ -85,16 +85,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
             },
             toggleMeasurement: function() {
                 //Toggle Fahrenheit and Celsius
-                toggle.innerHTML = "&deg;C";
+                toggle.innerHTML = "/ &deg;C";
 
                 toggle.addEventListener("mousedown", function() {
 
                     if (newMeasurement == tempC) {
                         newMeasurement = tempF;
-                        this.innerHTML = "&deg;C";
+                        this.innerHTML = "/ &deg;C";
                     } else {
                         newMeasurement = tempC;
-                        this.innerHTML = "&deg;F";
+                        this.innerHTML = "/ &deg;F";
                     }
 
                     measurement.innerHTML = newMeasurement;

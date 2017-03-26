@@ -82,7 +82,7 @@ body {
     font-size: 2.1em;
     font-family: monospace;
     height: 10px;
-    margin: 0 34px 0 30%;
+    margin: 0 70px 0 30%;
     text-shadow: 2px 4px 8px black;
 }
 #changeMeasurement:hover {
@@ -111,7 +111,7 @@ body {
         margin-left: 30%;
     }
     to {
-        margin-left: -10%;
+        margin-left: -80px;
     }
 }
 .wi-wind {
@@ -121,14 +121,14 @@ body {
     font-size: 3.9em;
     color: white;
     text-shadow: 0px 6px 10px black;
-    margin: 0 0 auto auto;
+    margin: auto;
     padding: 0;
 }
 .wi-day-sunny {
     -webkit-animation: spin 15s linear infinite;
     animation: spin 15s linear infinite;
 }
-.wi-day-cloudy, .wi-cloudy{
+.wi-cloudy{
     animation-duration: 4s;
     animation-name: slidein;
     animation-iteration-count: infinite;
@@ -155,25 +155,25 @@ body {
     body {
         font-size: 175%;
         width: 100%;
-        margin: 0px auto;
+        margin: 0 auto 2% 0;
+    }
+    .greeting-container {
+        margin-top: 2%;
     }
     .temp-container {
         display: flex;
-        margin-top: 7%;
+        margin-top: 2%;
     }
     #condition {
-        margin: auto;
+        margin: auto auto -15px auto;
         max-width: 33%;
     }
     #temp {
         margin: auto;
     }
     #changeMeasurement {
-    margin: auto;
+    margin: auto 8% auto 0;
     text-align: center;
-    }
-    #condition {
-        margin: auto;
     }
 }
 @media screen and (min-width: 1700px) {
