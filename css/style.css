@@ -134,8 +134,8 @@ body {
     padding: 0;
 }
 .wi-day-sunny {
-    -webkit-animation: spin 15s linear infinite;
-    animation: spin 15s linear infinite;
+    -webkit-animation: spin 23s linear infinite;
+    animation: spin 23s linear infinite;
 }
 .wi-cloudy{
     -webkit-animation: slidein 4s alternate infinite;
@@ -160,9 +160,6 @@ body {
     }
     #changeMeasurement {
         margin: auto 15% 0 0;
-    }
-    #cloudCoverage {
-        margin: auto;
     }
 }
 @media screen and (min-width: 1024px) {
@@ -189,7 +186,7 @@ body {
         margin: auto;
     }
     #changeMeasurement {
-    margin: auto 8% auto 0;
+    margin: auto;
     text-align: center;
     }
 }
@@ -201,9 +198,6 @@ body {
     .temp-container {
         margin-top: 5%;
     }
-    #temp {
-        margin: auto;
-    }
     #changeMeasurement {
         margin: auto auto 5% -2%;
         width: auto;
@@ -211,4 +205,9 @@ body {
     #condition {
         margin: auto;
     }
-};
+    #temp {
+        font-size: 800%;
+    }
+    .wi-day-cloudy, .wi-day-sunny, .wi-cloudy  {
+        font-size: 600%;
+    }
