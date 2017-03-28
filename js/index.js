@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 var response = JSON.parse(xhttp.responseText);
 
-                (function removeLoader() {
-
+                (function removeLoader() { //Remove loader
                     document.getElementById("loader").style.display = "none";
                 })();
+
                 //Add date and time
                 document.getElementById("date").innerHTML = date;
 
