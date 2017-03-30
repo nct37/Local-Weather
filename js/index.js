@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var windSpeed = Math.floor(data.current.wind_mph) + "mph";
         var measurement = document.getElementById("temp");
         var newMeasurement = tempF;
-        var toggle = document.getElementById("changeMeasurement");
 
         //Object to display data on the page
         var displayData = {
@@ -58,11 +57,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 var addCondition = document.createElement("div");
                 addCondition.id = 'condition';
                 var windIcon = "<i class='wi wi-wind wi-towards-" + windDirection.toLowerCase() + "'></i>";
-
+                //Displays weather conditions
                 document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + cloudCover + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windIcon + " " + windSpeed + ". " + "</p";
             },
             showClouds: function() {
-                var cloudIcon;
+                var cloudIcon = "wi wi-day-cloudy";
                 var cloudIconElement;
 
                 if (clouds >= 0 && clouds < 15) {
@@ -75,37 +74,32 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                 cloudIconElement = "<i class=" + cloudIcon + "></i>";
 
-
                 document.getElementById("cloudCoverage").innerHTML = cloudIconElement;
-
             },
             showTemp: function() {
-
                 measurement.innerHTML = tempF;
+                displayData.toggleMeasurement();
             },
             toggleMeasurement: function() {
-                //Toggle Fahrenheit and Celsius
-                toggle.innerHTML = "/ &deg;C";
 
-                toggle.addEventListener("mousedown", function() {
+                measurement.addEventListener("click", function() {
 
                     if (newMeasurement == tempC) {
                         newMeasurement = tempF;
-                        this.innerHTML = "/ &deg;C";
                     } else {
                         newMeasurement = tempC;
-                        this.innerHTML = "/ &deg;F";
                     }
 
-                    measurement.innerHTML = newMeasurement;
+                    this.innerHTML = newMeasurement;
+                    console.log(this.innerHTML);
                 });
             },
             displayBackgroundVisual: function() {
-                //condition = "thunder"; //- test background
                 var pageBackground = document.getElementById("weather");
                 var imagePath = "";
                 var imageUrl = "('https://res.cloudinary.com/dkdgt4co6/image/upload/";
                 var setBackground = condition.toLowerCase();
+
                 //Set background image based on conditions
                 if (["sunny", "sunshine", "clear"].indexOf(setBackground) >= 0) {
                     if (hours >= 21) {
@@ -172,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         displayData.showTemp();
         displayData.showClouds();
         displayData.showCondition();
-        displayData.toggleMeasurement();
     }
 });
 //Time

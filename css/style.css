@@ -1,6 +1,5 @@
 * {
     margin: 0px;
-    /*border: 1px red solid;*/
 }
 #loader {
   position: absolute;
@@ -10,7 +9,6 @@
   width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;
- /* border: 5px solid #ffff6b;*/
   border-radius: 50%;
   border-top: 7px solid #3498db;
   width: 180px;
@@ -23,19 +21,18 @@
   100% { -webkit-transform: rotate(360deg); }
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
 }
 body {
-    z-index: auto;
     background: no-repeat center center fixed;
-    /*background-repeat: no-repeat;*/
-    -webkit-background-size: cover !important;
-    -moz-background-size: cover !important;
-    -o-background-size: cover !important;
-    size: fill !important;
-    background-size: cover !important;
-    min-height: auto;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    size: fill;
+    background-size: cover;
+    min-height: 600px;
     max-width: 100%;
     margin: auto;
     height: 100%;
@@ -75,21 +72,11 @@ body {
     font-size: 7em;
     text-shadow: 2px 4px 8px black;
     margin: auto;
+    max-width: 40%;
 }
-#changeMeasurement {
-    color: yellow;
-    display: block;
-    text-align: right;;
-    font-size: 2.1em;
-    font-family: monospace;
-    height: 10px;
-    margin: 0 10% 2% 10%;
-    text-shadow: 2px 4px 8px black;
-}
-#changeMeasurement:hover {
-    color: rgb(33, 247, 235);
+#temp:hover {
     cursor: pointer;
-    text-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 1);
+    text-shadow: -5px 4px 4px slategray;
 }
 #condition {
     color: #77f957;
@@ -102,10 +89,18 @@ body {
     letter-spacing: 2px;
     line-height: 150%;
     background: rgba(10, 10, 10, 0.4);
-    margin: 3% auto 3% auto;
+    margin: 7% auto 3% auto;
     padding: 3%;
     text-shadow: 0px -3px 3px black;
     text-align: center;
+}
+@-webkit-keyframes slidein { /*For clouds*/
+    from {
+        margin-left: 15%;
+    }
+    to {
+        margin-left: -10%;
+    }
 }
 @keyframes slidein { /*For clouds*/
     from {
@@ -113,6 +108,14 @@ body {
     }
     to {
         margin-left: -10%;
+    }
+}
+@-webkit-keyframes slideup { /*For partly lcoudy*/
+    from {
+        margin-top: 50%;
+    }
+    to {
+        margin-top: 0;
     }
 }
 @keyframes slideup { /*For partly lcoudy*/
@@ -143,7 +146,7 @@ body {
 }
 .wi-day-cloudy {
     -webkit-animation: slideup 1.5s linear 1;
-    animation: slideup 1.5s linear 1;
+    animation: slideup 1.5s ease 1;
 }
 #condition-detail {
     color: yellow;
@@ -158,8 +161,8 @@ body {
         font-size: 150%;
         margin: 0px;
     }
-    #changeMeasurement {
-        margin: auto 15% 0 0;
+    #condition {
+        margin: 5% auto 2% auto;
     }
 }
 @media screen and (min-width: 1024px) {
@@ -175,19 +178,18 @@ body {
         margin-top: auto;
     }
     .temp-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         margin-top: 4%;
     }
     #condition {
-        margin: auto auto -15px auto;
+        margin: auto 2% auto 7%;
         max-width: 33%;
     }
     #temp {
         margin: auto;
-    }
-    #changeMeasurement {
-    margin: auto;
-    text-align: center;
+        max-width: 33%;
     }
 }
 @media screen and (min-width: 1700px) {
@@ -196,18 +198,16 @@ body {
         margin-bottom: auto;
     }
     .temp-container {
-        margin-top: 5%;
-    }
-    #changeMeasurement {
-        margin: auto auto 5% -2%;
-        width: auto;
+        margin: 5% auto;
     }
     #condition {
-        margin: auto;
+        margin-right: 3%;
     }
     #temp {
-        font-size: 800%;
+        font-size: 850%;
+        margin-right: 7%;
     }
     .wi-day-cloudy, .wi-day-sunny, .wi-cloudy  {
         font-size: 600%;
     }
+}
