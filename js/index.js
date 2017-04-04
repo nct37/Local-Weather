@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.querySelector(".temp-container").appendChild(addCondition).innerHTML = "<span id='condition-detail'>" + condition + "</span>" + "<p>Cloud cover " + cloudCover + "</p>" + "<p>Humidity " + humidity + ". Winds " + "<em>" + windDirection + "</em>" + " " + windIcon + " " + windSpeed + ". " + "</p";
             },
             showClouds: function() {
-                var cloudIcon = "wi wi-day-cloudy";
+                var cloudIcon;
                 var cloudIconElement;
 
                 if (clouds >= 0 && clouds < 15) {
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             },
             toggleMeasurement: function() {
 
-                measurement.addEventListener("click", function() {
+                measurement.addEventListener("mousedown", function() {
 
                     if (newMeasurement == tempC) {
                         newMeasurement = tempF;

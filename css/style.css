@@ -76,7 +76,8 @@ body {
 }
 #temp:hover {
     cursor: pointer;
-    text-shadow: -5px 4px 4px slategray;
+    padding: auto 3% auto 3%;
+    text-shadow: -5px 4px 4px black;
 }
 #condition {
     color: #77f957;
@@ -97,33 +98,41 @@ body {
 @-webkit-keyframes slidein { /*For clouds*/
     from {
         margin-left: 15%;
+        opacity: 0.2;
     }
     to {
         margin-left: -10%;
+        opacity: 1;
     }
 }
 @keyframes slidein { /*For clouds*/
     from {
         margin-left: 15%;
+        opacity: 0.2;
     }
     to {
         margin-left: -10%;
+        opacity: 1;
     }
 }
 @-webkit-keyframes slideup { /*For partly lcoudy*/
     from {
         margin-top: 50%;
+        opacity: 0.2;
     }
     to {
         margin-top: 0;
+        opacity: 1;
     }
 }
 @keyframes slideup { /*For partly lcoudy*/
     from {
         margin-top: 50%;
+        opacity: 0.2;
     }
     to {
         margin-top: 0;
+        opacity: 1;
     }
 }
 .wi-wind {
@@ -146,7 +155,7 @@ body {
 }
 .wi-day-cloudy {
     -webkit-animation: slideup 1.5s linear 1;
-    animation: slideup 1.5s ease 1;
+    animation: slideup 4s ease 1;
 }
 #condition-detail {
     color: yellow;
