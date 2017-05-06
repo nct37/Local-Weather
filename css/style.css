@@ -135,10 +135,12 @@ body {
         opacity: 1;
     }
 }
+/* Wind direction icon*/
 .wi-wind {
     font-size: 1.7em;
 }
-.wi-day-cloudy, .wi-day-sunny, .wi-cloudy {
+/* Weather icons*/
+.wi-day-cloudy, .wi-day-sunny, .wi-cloudy, .wi-night-alt-cloudy, .wi-night-clear {
     font-size: 4em;
     color: white;
     text-shadow: 0px 6px 10px black;
@@ -153,7 +155,7 @@ body {
     -webkit-animation: slidein 4s alternate infinite;
     animation: slidein 4s alternate infinite;
 }
-.wi-day-cloudy {
+.wi-day-cloudy, .wi-night-alt-cloudy {
     -webkit-animation: slideup 1.5s linear 1;
     animation: slideup 4s ease 1;
 }
@@ -216,7 +218,7 @@ body {
         font-size: 850%;
         margin-right: 7%;
     }
-    .wi-day-cloudy, .wi-day-sunny, .wi-cloudy  {
+    .wi-day-cloudy, .wi-day-sunny, .wi-cloudy, .wi-night-clear, .wi-night-alt-cloudy  {
         font-size: 600%;
     }
 }
