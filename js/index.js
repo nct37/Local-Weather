@@ -64,13 +64,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var cloudIconElement = "";
 
         if (clouds >= 0 && clouds < 15) {
-          if (hours >= 21 && hours < 6) {
+          if (hours >= 21 || hours < 6) {
             cloudIcon = "'wi wi-night-clear'";
           } else {
             cloudIcon = "'wi wi-day-sunny'";
           }
         } else if (clouds < 80 && clouds > 15) {
-          if (hours >= 21 && hours < 6) {
+          if (hours >= 21 || hours < 6) {
             cloudIcon = "'wi wi-night-alt-cloudy'";
           } else {
             cloudIcon = "'wi wi-day-cloudy'";
