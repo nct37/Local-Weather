@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function(event) {
-  //Date
   let today = new Date();
   let hours = today.getHours();
   let date = today.toLocaleDateString();
@@ -14,14 +13,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
     if (!position.coords) {
       setLocation = prompt('Please enter a zipcode');
     } else {
-      setLocation = position.coords.latitude + ',' + position.coords.longitude;
+      setLocation = `${position.coords.latitude},${position.coords.longitude}`;
     }
 
     loadDateandTime();
 
     return fetch(
-      'http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=' +
-        setLocation
+      `http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${setLocation}`
     )
       .then(data => data.json())
       .then(json => getData(json));
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     document.getElementById('date').innerHTML = date;
     time();
   }
-  45242;
 
   function getData(data) {
     console.log(data.current);
@@ -46,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const humidity = `${data.current.humidity}%`;
     const windDirection = data.current.wind_dir;
     const clouds = data.current.cloudcover;
-    let windSpeed = `${data.current.wind_speed || 0} mph`;
+    let windSpeed = `${data.current.wind_speed || 0}mph`;
 
     let measurement = document.getElementById('temp');
     let newMeasurement = tempF;
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
         addCondition.id = 'condition';
         let cloudCover = `${clouds}%`;
         let windIcon = `<i class='wi wi-wind wi-towards-${windDirection.toLowerCase()}'}></i>`;
-        console.log(windIcon);
 
         document
           .querySelector('.temp-container')
@@ -99,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         displayData.toggleMeasurement();
       },
       toggleMeasurement: function() {
-        measurement.addEventListener('mousedown', function() {
+        measurement.addEventListener('click', function() {
           newMeasurement == tempC
             ? (newMeasurement = tempF)
             : (newMeasurement = tempC);
