@@ -16,13 +16,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
       setLocation = `${position.coords.latitude},${position.coords.longitude}`;
     }
 
-    loadDateandTime();
-
     return fetch(
       `http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${setLocation}`
     )
       .then(data => data.json())
-      .then(json => getData(json));
+      .then(json => getData(json))
+      .finally(() => {
+        loadDateandTime();
+      });
   }
 
   function loadDateandTime() {
@@ -42,8 +43,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const humidity = `${data.current.humidity}%`;
     const windDirection = data.current.wind_dir;
     const clouds = data.current.cloudcover;
-    let windSpeed = `${data.current.wind_speed || 0}mph`;
+    const feelsLike = `${Math.floor(
+      data.current.feelslike * (9 / 5) + 32
+    )}&deg;F`;
+    const precip = `${data.current.precip}%`;
 
+    let windSpeed = `${data.current.wind_speed || 0}mph`;
     let measurement = document.getElementById('temp');
     let newMeasurement = tempF;
 
@@ -63,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
             addCondition
           ).innerHTML = `<span id='condition-detail'>${condition}</span>
           <p>Cloud cover ${cloudCover}</p>
-          <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} ${windSpeed}</p>`;
+          <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} ${windSpeed} |</p>
+          <p>Feels like ${feelsLike} | ${precip} precipitation</p>`;
       },
       showClouds: function() {
         let cloudIcon = "'wi wi-night-clear'";

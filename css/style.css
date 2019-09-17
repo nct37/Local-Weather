@@ -1,5 +1,6 @@
 * {
-    margin: 0px;
+  box-sizing: border-box;
+  margin: auto;
 }
 #loader {
   position: absolute;
@@ -17,208 +18,224 @@
   animation: spin 1s linear infinite;
 }
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @keyframes spin {
-  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 body {
-    background: no-repeat center center fixed;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    size: fill;
-    background-size: cover;
-    min-height: 600px;
-    max-width: 100%;
-    margin: auto;
-    height: 100%;
-    font-family: 'Open Sans Condensed', sans-serif;
-    text-align: center;
+  background: no-repeat center center fixed;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  size: fill;
+  background-size: cover;
+  font-size: 150%;
+  min-height: 100vh;
+  max-width: 100vw;
+  height: 100%;
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-align: center;
 }
 .display-container {
-    margin: 1%;
+  margin: 2%;
 }
 .temp-container {
-    margin-top: 0;
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+}
+.temp-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
 }
 #location {
-    color: white;
-    font-size: 3em;
-    margin: auto;
-    text-shadow: 2px 4px 10px black;
+  color: white;
+  font-size: 3em;
+  margin: auto;
+  text-shadow: 2px 4px 10px black;
 }
 #greeting {
-    color: white;
-    font-size: 2em;
-    margin: auto;
-    text-shadow: 2px 4px 10px black;
+  color: white;
+  font-size: 2em;
+  margin: auto;
+  text-shadow: 2px 4px 10px black;
 }
 #date {
-    color: white;
-    font-size: 1.9em;
-    text-shadow: 2px 4px 8px black;
+  color: white;
+  font-size: 1.9em;
+  text-shadow: 2px 4px 8px black;
 }
 #time {
-    color: white;
-    font-size: 1.2em;
-    text-shadow: 2px 4px 8px black;
+  color: white;
+  font-size: 1.2em;
+  text-shadow: 2px 4px 8px black;
 }
 #temp {
-    color: yellow;
-    font-size: 7em;
-    text-shadow: 2px 4px 8px black;
-    margin: auto;
-    max-width: 40%;
+  color: yellow;
+  font-size: 7.5em;
+  text-shadow: 2px 4px 8px black;
 }
 #temp:hover {
-    cursor: pointer;
-    padding: auto 3% auto 3%;
-    text-shadow: -5px 4px 4px black;
+  cursor: pointer;
+  padding: auto 3% auto 3%;
+  text-shadow: -5px 4px 4px black;
 }
+
 #condition {
-    color: #77f957;
-    display: inline-block;
-    border-radius: 90px;
-    box-shadow: 2px 3px 8px black;
-    font-family: monospace;
-    font-size: 1.2em;
-    word-spacing: 1px;
-    letter-spacing: 2px;
-    line-height: 150%;
-    background: rgba(10, 10, 10, 0.4);
-    margin: 7% auto 3% auto;
-    padding: 3%;
-    text-shadow: 0px -3px 3px black;
-    text-align: center;
+  background: rgba(10, 10, 10, 0.4);
+  /* border-radius: 90px; */
+  box-shadow: 2px 3px 8px black;
+  color: #77f957;
+  font-family: monospace;
+  font-size: 1.2em;
+  word-spacing: 1px;
+  letter-spacing: 2px;
+  line-height: 150%;
+  padding: 3% 2%;
+  text-shadow: 0px -3px 3px black;
+  text-align: center;
+  margin-right: 2%;
 }
-@-webkit-keyframes slidein { /*For clouds*/
-    from {
-        margin-left: 15%;
-        opacity: 0.2;
-    }
-    to {
-        margin-left: -10%;
-        opacity: 1;
-    }
+@-webkit-keyframes slidein {
+  /*For clouds*/
+  from {
+    margin-left: 15%;
+    opacity: 0.2;
+  }
+  to {
+    margin-left: -10%;
+    opacity: 1;
+  }
 }
-@keyframes slidein { /*For clouds*/
-    from {
-        margin-left: 15%;
-        opacity: 0.2;
-    }
-    to {
-        margin-left: -10%;
-        opacity: 1;
-    }
+@keyframes slidein {
+  /*For clouds*/
+  from {
+    margin-left: 15%;
+    opacity: 0.2;
+  }
+  to {
+    margin-left: -10%;
+    opacity: 1;
+  }
 }
-@-webkit-keyframes slideup { /*For partly lcoudy*/
-    from {
-        margin-top: 50%;
-        opacity: 0.2;
-    }
-    to {
-        margin-top: 0;
-        opacity: 1;
-    }
+@-webkit-keyframes slideup {
+  /*For partly lcoudy*/
+  from {
+    margin-top: 50%;
+    opacity: 0.2;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
 }
-@keyframes slideup { /*For partly lcoudy*/
-    from {
-        margin-top: 50%;
-        opacity: 0.2;
-    }
-    to {
-        margin-top: 0;
-        opacity: 1;
-    }
+@keyframes slideup {
+  /*For partly lcoudy*/
+  from {
+    margin-top: 50%;
+    opacity: 0.2;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
 }
 /* Wind direction icon*/
 .wi-wind {
-    font-size: 1.7em;
+  font-size: 1.7em;
 }
 /* Weather icons*/
-.wi-day-cloudy, .wi-day-sunny, .wi-cloudy, .wi-night-alt-cloudy, .wi-night-clear {
-    font-size: 4em;
-    color: white;
-    text-shadow: 0px 6px 10px black;
-    margin: auto;
-    padding: 0;
+.wi-day-cloudy,
+.wi-day-sunny,
+.wi-cloudy,
+.wi-night-alt-cloudy,
+.wi-night-clear {
+  font-size: 4em;
+  color: white;
+  text-shadow: 0px 6px 10px black;
+  margin: auto;
+  padding: 0;
 }
 .wi-day-sunny {
-    -webkit-animation: spin 23s linear infinite;
-    animation: spin 23s linear infinite;
+  -webkit-animation: spin 23s linear infinite;
+  animation: spin 23s linear infinite;
 }
-.wi-cloudy{
-    -webkit-animation: slidein 4s alternate infinite;
-    animation: slidein 4s alternate infinite;
+.wi-cloudy {
+  -webkit-animation: slidein 4s alternate infinite;
+  animation: slidein 4s alternate infinite;
 }
-.wi-day-cloudy, .wi-night-alt-cloudy {
-    -webkit-animation: slideup 1.5s linear 1;
-    animation: slideup 4s ease 1;
+.wi-day-cloudy,
+.wi-night-alt-cloudy {
+  -webkit-animation: slideup 1.5s linear 1;
+  animation: slideup 4s ease 1;
 }
 #condition-detail {
-    color: yellow;
-    text-shadow: 0px -3px 3px black;
-    text-align: center;
-    font-size: 1.5em;
-    text-transform: uppercase;
+  color: yellow;
+  text-shadow: 0px -3px 3px black;
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    font-size: 110%;
+  }
+  .display-container {
+    margin-top: 0;
+  }
+  .greeting-container {
+    margin-top: auto;
+  }
+  .temp-container {
+    flex-direction: column;
+    margin-top: 4%;
+  }
+  #cloudCoverage {
+    width: 100%;
+  }
+  #temp {
+    width: 100%;
+  }
+  #condition {
+    align-self: center;
+    padding: 5%;
+    width: 90%;
     margin: auto;
+  }
 }
-@media screen and (min-width: 480px) {
-    body {
-        font-size: 150%;
-        margin: 0px;
-    }
-    #condition {
-        margin: 5% auto 2% auto;
-    }
-}
-@media screen and (min-width: 1024px) {
-    body {
-        font-size: 175%;
-        width: 100%;
-        margin: 0 auto 2% 0;
-    }
-    .display-container{
-      margin-top: 0;
-    }
-    .greeting-container {
-        margin-top: auto;
-    }
-    .temp-container {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        margin-top: 4%;
-    }
-    #condition {
-        margin: auto 2% auto 7%;
-        max-width: 33%;
-    }
-    #temp {
-        margin: auto;
-        max-width: 33%;
-    }
-}
-@media screen and (min-width: 1700px) {
-    body {
-        font-size: 200%;
-        margin-bottom: auto;
-    }
-    .temp-container {
-        margin: 5% auto;
-    }
-    #condition {
-        margin-right: 3%;
-    }
-    #temp {
-        font-size: 850%;
-        margin-right: 7%;
-    }
-    .wi-day-cloudy, .wi-day-sunny, .wi-cloudy, .wi-night-clear, .wi-night-alt-cloudy  {
-        font-size: 600%;
-    }
+@media screen and (min-width: 1400px) {
+  body {
+    font-size: 200%;
+  }
+
+  #temp {
+    font-size: 9em;
+  }
+  #condition {
+    align-self: center;
+  }
+  .wi-day-cloudy,
+  .wi-day-sunny,
+  .wi-cloudy,
+  .wi-night-clear,
+  .wi-night-alt-cloudy {
+    font-size: 500%;
+  }
 }
