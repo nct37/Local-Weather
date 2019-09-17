@@ -36,21 +36,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const location = `${data.location.name},
                       ${data.location.region}`;
     const condition = data.current.weather_descriptions[0];
-    const tempC = `${Math.floor(data.current.temperature)}&deg;C`;
-    const tempF = `${Math.floor(
-      data.current.temperature * (9 / 5) + 32
-    )}&deg;F`;
+    const tempC = `${Math.floor(data.current.temperature)}&deg;C`; 
+    const tempF = `${Math.floor(data.current.temperature * (9 / 5) + 32)}&deg;F`; 
+    const feelsLikeC = `${Math.floor(data.current.feelslike)}&deg;C`;
+    const feelsLikeF = `${Math.floor(data.current.feelslike * (9 / 5) + 32)}&deg;F`;
     const humidity = `${data.current.humidity}%`;
     const windDirection = data.current.wind_dir;
     const clouds = data.current.cloudcover;
-    const feelsLike = `${Math.floor(
-      data.current.feelslike * (9 / 5) + 32
-    )}&deg;F`;
     const precip = `${data.current.precip}%`;
 
+    let measurementIsF = false;
     let windSpeed = `${data.current.wind_speed || 0}mph`;
-    let measurement = document.getElementById('temp');
-    let newMeasurement = tempF;
+    let feelsLike = feelsLikeF;
+    
+    const mainTemp = document.getElementById('temp');
+
+    function setTempMeasurementState() {
+      measurementIsF = !measurementIsF;
+      return measurementIsF;
+    }
 
     const displayData = {
       showLocation: function() {
@@ -68,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
             addCondition
           ).innerHTML = `<span id='condition-detail'>${condition}</span>
           <p>Cloud cover ${cloudCover}</p>
-          <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} ${windSpeed} |</p>
-          <p>Feels like ${feelsLike} | ${precip} precipitation</p>`;
+          <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} ${windSpeed}</p>
+          <p>${precip} precipitation | Feels like <span id='feels-like'>${feelsLike}</span></p>`;
       },
       showClouds: function() {
         let cloudIcon = "'wi wi-night-clear'";
@@ -96,15 +100,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById('cloudCoverage').innerHTML = cloudIconElement;
       },
       showTemp: function() {
-        measurement.innerHTML = tempF;
+        mainTemp.innerHTML = tempF;
         displayData.toggleMeasurement();
       },
       toggleMeasurement: function() {
-        measurement.addEventListener('click', function() {
-          newMeasurement == tempC
-            ? (newMeasurement = tempF)
-            : (newMeasurement = tempC);
-          this.innerHTML = newMeasurement;
+        mainTemp.addEventListener('click', function() {
+         let feelsLike = document.getElementById('feels-like');
+         setTempMeasurementState();
+         if(!measurementIsF) {
+           mainTemp.innerHTML = tempF;
+           feelsLike.innerHTML = feelsLikeF;
+         } else {
+           mainTemp.innerHTML = tempC;
+           feelsLike.innerHTML = feelsLikeC;
+         }
         });
       },
       displayBackgroundVisual: function() {

@@ -35,6 +35,28 @@
     transform: rotate(360deg);
   }
 }
+
+@-webkit-keyframes slideup {
+  from {
+    margin-top: 50%;
+    opacity: 0.2;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+@keyframes slideup {
+  from {
+    margin-top: 50%;
+    opacity: 0.2;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
 body {
   background: no-repeat center center fixed;
   background-repeat: no-repeat;
@@ -97,63 +119,16 @@ body {
 }
 
 #condition {
-  background: rgba(10, 10, 10, 0.4);
-  /* border-radius: 90px; */
-  box-shadow: 2px 3px 8px black;
-  color: #77f957;
+  background: rgba(0, 0, 0, 0.5);
+  color: #a5d6ff;
   font-family: monospace;
   font-size: 1.2em;
   word-spacing: 1px;
   letter-spacing: 2px;
   line-height: 150%;
   padding: 3% 2%;
-  text-shadow: 0px -3px 3px black;
   text-align: center;
   margin-right: 2%;
-}
-@-webkit-keyframes slidein {
-  /*For clouds*/
-  from {
-    margin-left: 15%;
-    opacity: 0.2;
-  }
-  to {
-    margin-left: -10%;
-    opacity: 1;
-  }
-}
-@keyframes slidein {
-  /*For clouds*/
-  from {
-    margin-left: 15%;
-    opacity: 0.2;
-  }
-  to {
-    margin-left: -10%;
-    opacity: 1;
-  }
-}
-@-webkit-keyframes slideup {
-  /*For partly lcoudy*/
-  from {
-    margin-top: 50%;
-    opacity: 0.2;
-  }
-  to {
-    margin-top: 0;
-    opacity: 1;
-  }
-}
-@keyframes slideup {
-  /*For partly lcoudy*/
-  from {
-    margin-top: 50%;
-    opacity: 0.2;
-  }
-  to {
-    margin-top: 0;
-    opacity: 1;
-  }
 }
 /* Wind direction icon*/
 .wi-wind {
@@ -170,24 +145,11 @@ body {
   text-shadow: 0px 6px 10px black;
   margin: auto;
   padding: 0;
-}
-.wi-day-sunny {
-  -webkit-animation: spin 23s linear infinite;
-  animation: spin 23s linear infinite;
-}
-.wi-cloudy {
-  -webkit-animation: slidein 4s alternate infinite;
-  animation: slidein 4s alternate infinite;
-}
-.wi-day-cloudy,
-.wi-night-alt-cloudy {
-  -webkit-animation: slideup 1.5s linear 1;
-  animation: slideup 4s ease 1;
+  -webkit-animation: slideup 1.2s ease 1;
+  animation: slideup 1.2s ease 1;
 }
 #condition-detail {
   color: yellow;
-  text-shadow: 0px -3px 3px black;
-  text-align: center;
   font-size: 1.5em;
   text-transform: uppercase;
   margin: auto;
@@ -195,17 +157,11 @@ body {
 
 @media screen and (max-width: 1024px) {
   body {
-    font-size: 110%;
-  }
-  .display-container {
-    margin-top: 0;
-  }
-  .greeting-container {
-    margin-top: auto;
+    font-size: 100%;
   }
   .temp-container {
     flex-direction: column;
-    margin-top: 4%;
+    margin-top: 6%;
   }
   #cloudCoverage {
     width: 100%;
@@ -216,7 +172,7 @@ body {
   #condition {
     align-self: center;
     padding: 5%;
-    width: 90%;
+    width: 80%;
     margin: auto;
   }
 }
@@ -224,7 +180,6 @@ body {
   body {
     font-size: 200%;
   }
-
   #temp {
     font-size: 9em;
   }
