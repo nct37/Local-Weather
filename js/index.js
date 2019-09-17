@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
           ).innerHTML = `<span id='condition-detail'>${condition}</span>
           <p>Cloud cover ${cloudCover}</p>
           <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} ${windSpeed}</p>`;
-        45242;
       },
       showClouds: function() {
         let cloudIcon = "'wi wi-night-clear'";
@@ -170,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
         }
 
         pageBackground.style.backgroundImage = `url${imageUrl}${imagePath}')`;
-        // 'url' + imageUrl + imagePath + "')";
       },
       showGreeting: function() {
         let setGreeting = document.getElementById('greeting');
