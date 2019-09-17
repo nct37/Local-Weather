@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     loadDateandTime();
 
     return fetch(
-      `https://cors-anywhere.herokuapp.com/http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${setLocation}`
+      `http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${setLocation}`
     )
       .then(data => data.json())
       .then(json => getData(json));
