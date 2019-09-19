@@ -17,12 +17,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 
     return fetch(
-      `http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${setLocation}`
+      `https://cors-anywhere.herokuapp.com/http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${setLocation}&units=f`
     )
       .then(data => data.json())
       .then(json => getData(json))
       .finally(() => {
         loadDateandTime();
+      })
+      .catch(error => {
+        alert(
+          'There was a problem requesting the data. Please refresh the page!'
+        );
+        console.error(error);
       });
   }
 
@@ -33,22 +39,32 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 
   function getData(data) {
+    console.log(data);
     const location = `${data.location.name},
                       ${data.location.region}`;
     const condition = data.current.weather_descriptions[0];
-    const tempC = `${Math.floor(data.current.temperature)}&deg;C`; 
-    const tempF = `${Math.floor(data.current.temperature * (9 / 5) + 32)}&deg;F`; 
-    const feelsLikeC = `${Math.floor(data.current.feelslike)}&deg;C`;
-    const feelsLikeF = `${Math.floor(data.current.feelslike * (9 / 5) + 32)}&deg;F`;
+    const tempC = `${Math.floor(
+      ((data.current.temperature - 32) * 5) / 9
+    )}&deg;C`;
+    const tempF = `${Math.floor(data.current.temperature)}&deg;F`;
+    const feelsLikeC = `${Math.floor(
+      ((data.current.feelslike - 32) * 5) / 9
+    )}&deg;C`;
+    const feelsLikeF = `${Math.floor(data.current.feelslike)}&deg;F`;
     const humidity = `${data.current.humidity}%`;
     const windDirection = data.current.wind_dir;
     const clouds = data.current.cloudcover;
-    const precip = `${data.current.precip}%`;
+    const precipInch = `${data.current.precip}"`;
+    const precipMM = `${Math.floor(data.current.precip * 25.4)}mm`;
+    const uv = `${data.current.uv_index}`;
+    const windSpeedMph = `${data.current.wind_speed || 0}mph`;
+    const windSpeedKph = `${Math.ceil(data.current.wind_speed * 1.609)}kph`;
 
     let measurementIsF = false;
-    let windSpeed = `${data.current.wind_speed || 0}mph`;
+    let windSpeed = windSpeedMph;
     let feelsLike = feelsLikeF;
-    
+    let precip = precipInch;
+
     const mainTemp = document.getElementById('temp');
 
     function setTempMeasurementState() {
@@ -72,8 +88,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
             addCondition
           ).innerHTML = `<span id='condition-detail'>${condition}</span>
           <p>Cloud cover ${cloudCover}</p>
-          <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} ${windSpeed}</p>
-          <p>${precip} precipitation | Feels like <span id='feels-like'>${feelsLike}</span></p>`;
+          <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} <span id="wind-speed">${windSpeed}</span></p>
+          <p>Precip <span id="precip">${precip}</span> | Feels like <span id="feels-like">${feelsLike}</span></p>
+          <p>UV index ${uv}</p>`;
       },
       showClouds: function() {
         let cloudIcon = "'wi wi-night-clear'";
@@ -105,15 +122,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
       },
       toggleMeasurement: function() {
         mainTemp.addEventListener('click', function() {
-         let feelsLike = document.getElementById('feels-like');
-         setTempMeasurementState();
-         if(!measurementIsF) {
-           mainTemp.innerHTML = tempF;
-           feelsLike.innerHTML = feelsLikeF;
-         } else {
-           mainTemp.innerHTML = tempC;
-           feelsLike.innerHTML = feelsLikeC;
-         }
+          let feelsLike = document.getElementById('feels-like');
+          let precip = document.getElementById('precip');
+          let windSpeed = document.getElementById('wind-speed');
+          setTempMeasurementState();
+          if (!measurementIsF) {
+            mainTemp.innerHTML = tempF;
+            feelsLike.innerHTML = feelsLikeF;
+            precip.innerHTML = precipInch;
+            windSpeed.innerHTML = windSpeedMph;
+          } else {
+            mainTemp.innerHTML = tempC;
+            feelsLike.innerHTML = feelsLikeC;
+            precip.innerHTML = precipMM;
+            windSpeed.innerHTML = windSpeedKph;
+          }
         });
       },
       displayBackgroundVisual: function() {

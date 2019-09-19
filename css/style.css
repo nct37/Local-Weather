@@ -122,11 +122,9 @@ body {
   background: rgba(0, 0, 0, 0.5);
   color: #a5d6ff;
   font-family: monospace;
-  font-size: 1.2em;
-  word-spacing: 1px;
   letter-spacing: 2px;
   line-height: 150%;
-  padding: 3% 2%;
+  padding: 3% 8%;
   text-align: center;
   margin-right: 2%;
 }
@@ -155,6 +153,14 @@ body {
   margin: auto;
 }
 
+@media screen and (max-width: 480px) {
+  #condition {
+    word-spacing: 0;
+    text-align: justify;
+    letter-spacing: initial;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   body {
     font-size: 100%;
@@ -171,6 +177,7 @@ body {
   }
   #condition {
     align-self: center;
+    font-size: 1.2em;
     padding: 5%;
     width: 80%;
     margin: auto;
