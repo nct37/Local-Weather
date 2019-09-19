@@ -2,44 +2,42 @@ document.addEventListener('DOMContentLoaded', function(event) {
   let today = new Date();
   let hours = today.getHours();
   let date = today.toLocaleDateString();
+  let setLocation = '';
 
-  window.navigator.geolocation.getCurrentPosition(
-    getLocationWeather,
-    getLocationWeather
-  );
 
-  function getLocationWeather(position) {
-    let setLocation = '';
+  window.navigator.geolocation.getCurrentPosition(getLocationWeather, getLocationWeather);
+
+  function getLocation(position) {
     if (!position.coords) {
-      setLocation = 'fetch:ip';
+      setLocation = prompt('Please enter a city name or zipcode') || 'fetch:ip';      
     } else {
-      setLocation = `${position.coords.latitude},${position.coords.longitude}`;
-    }
+      setLocation = `${position.coords.latitude},${position.coords.longitude}`; 
+    } 
+    return setLocation;
+  }
 
-    return fetch(
-      `https://cors-anywhere.herokuapp.com/http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${setLocation}&units=f`
-    )
-      .then(data => data.json())
-      .then(json => getData(json))
-      .finally(() => {
-        loadDateandTime();
-      })
-      .catch(error => {
-        alert(
-          'There was a problem requesting the data. Please refresh the page!'
-        );
-        console.error(error);
-      });
+  async function getLocationWeather(setLocation) { 
+    let location = getLocation(setLocation);
+    try {
+      const data = await fetch(`http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${location}&units=f`);
+      const json = await data.json();
+      getData(json);
+      return loadDateandTime();
+    }
+    catch (error) {
+      alert('There was a problem with the data. Please try again!');
+      console.error(error);
+    }
   }
 
   function loadDateandTime() {
     document.getElementById('loader').style.display = 'none';
+    document.getElementById('loading-message').style.display = 'none';
     document.getElementById('date').innerHTML = date;
     time();
   }
 
   function getData(data) {
-    console.log(data);
     const location = `${data.location.name},
                       ${data.location.region}`;
     const condition = data.current.weather_descriptions[0];
@@ -69,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     function setTempMeasurementState() {
       measurementIsF = !measurementIsF;
-      return measurementIsF;
     }
 
     const displayData = {
@@ -95,6 +92,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
       showClouds: function() {
         let cloudIcon = "'wi wi-night-clear'";
         let cloudIconElement = '';
+
+        // TODO: add switch statement
 
         if (clouds >= 0 && clouds < 15) {
           if (hours >= 21 || hours < 6) {
@@ -144,6 +143,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let imageUrl = `('https://res.cloudinary.com/dkdgt4co6/image/upload/`;
         let setBackground = condition.toLowerCase();
         let imagePath = '';
+
+        // TODO: add switch statement
 
         if (['sunny', 'sunshine', 'clear'].indexOf(setBackground) >= 0) {
           if (hours >= 21) {
