@@ -2,29 +2,34 @@ document.addEventListener('DOMContentLoaded', function(event) {
   let today = new Date();
   let hours = today.getHours();
   let date = today.toLocaleDateString();
-  let setLocation = '';
+  let setLocation = 'fetch:ip';
+  let coords = '';
 
-
-  window.navigator.geolocation.getCurrentPosition(getLocationWeather, getLocationWeather);
+  window.navigator.geolocation.getCurrentPosition(
+    getLocationWeather,
+    getLocationWeather
+  );
 
   function getLocation(position) {
     if (!position.coords) {
-      setLocation = prompt('Please enter a city name or zipcode') || 'fetch:ip';      
+      return setLocation;
     } else {
-      setLocation = `${position.coords.latitude},${position.coords.longitude}`; 
-    } 
-    return setLocation;
+      coords = `${position.coords.latitude},${position.coords.longitude}`;
+      setLocation = coords;
+      return setLocation;
+    }
   }
 
-  async function getLocationWeather(setLocation) { 
+  async function getLocationWeather(setLocation) {
     let location = getLocation(setLocation);
     try {
-      const data = await fetch(`http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${location}&units=f`);
+      const data = await fetch(
+        `http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${location}&units=f`
+      );
       const json = await data.json();
       getData(json);
       return loadDateandTime();
-    }
-    catch (error) {
+    } catch (error) {
       alert('There was a problem with the data. Please try again!');
       console.error(error);
     }
@@ -84,10 +89,42 @@ document.addEventListener('DOMContentLoaded', function(event) {
           .appendChild(
             addCondition
           ).innerHTML = `<span id='condition-detail'>${condition}</span>
-          <p>Cloud cover ${cloudCover}</p>
-          <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} <span id="wind-speed">${windSpeed}</span></p>
-          <p>Precip <span id="precip">${precip}</span> | Feels like <span id="feels-like">${feelsLike}</span></p>
-          <p>UV index ${uv}</p>`;
+        <p>Cloud cover ${cloudCover}</p>
+        <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} <span id="wind-speed">${windSpeed}</span></p>
+        <p>Precip <span id="precip">${precip}</span> | Feels like <span id="feels-like">${feelsLike}</span></p>
+        <p>UV index ${uv}</p>
+        <div>
+          <input type='text' id="update-input" /><button type='button' id="update">Update</button><button type='button' id='coords'>GPS</button>
+        </div>`;
+
+        document.getElementById('update').addEventListener('click', e => {
+          e.preventDefault();
+          const location = document.getElementById('update-input').value;
+          if (location.length < 1) {
+            alert('Please enter a valid city name or zipcode');
+          } else {
+            setLocation = location;
+            let condition = document.getElementById('condition');
+            condition.remove();
+            getLocationWeather(setLocation);
+          }
+        });
+
+        document.getElementById('coords').addEventListener('click', e => {
+          e.preventDefault();
+          if (coords.length < 1) {
+            alert(
+              'Location services are disable. Please enable to get accurate weather'
+            );
+          } else {
+            let location = document.getElementById('update-input').value;
+            location = coords;
+            setLocation = location;
+            let condition = document.getElementById('condition');
+            condition.remove();
+            getLocationWeather(setLocation);
+          }
+        });
       },
       showClouds: function() {
         let cloudIcon = "'wi wi-night-clear'";
