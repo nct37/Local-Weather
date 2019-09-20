@@ -75,13 +75,14 @@ body {
   background-size: cover;
   font-size: 150%;
   min-height: 100vh;
-  max-width: 100vw;
-  height: 100%;
+  max-width: 100vw; 
   font-family: 'Open Sans Condensed', sans-serif;
-  text-align: center;
 }
 .display-container {
   margin: 2%;
+}
+.greeting-container {
+  text-align: center;
 }
 .temp-container {
   display: flex;
@@ -132,14 +133,63 @@ body {
   font-family: monospace;
   letter-spacing: 2px;
   line-height: 150%;
-  padding: 3% 8%;
+  padding: 3% 10%;
   text-align: center;
   margin-right: 2%;
 }
+
+.location-input {
+  background: white;
+  display: flex;
+  height: 100%;
+  width: 70%;
+  margin-top: 2%;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
+.location-input:hover {
+  opacity: 1;
+}
+
+#update-input {
+  background: none;
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  padding-left: 5%;
+}
+
+.input-btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+
+}
+
+.input-btns button {
+  border: none;
+  color: white;
+  margin: 0;
+  padding: 2%;
+}
+
+#update {
+  background: black;
+}
+
+#coords {
+  background: green;
+
+}
+
 /* Wind direction icon*/
 .wi-wind {
   font-size: 1.7em;
 }
+
 /* Weather icons*/
 .wi-day-cloudy,
 .wi-day-sunny,
@@ -166,6 +216,21 @@ body {
     word-spacing: 0;
     text-align: justify;
     letter-spacing: initial;
+  }
+  .location-input {
+    flex-direction: column; 
+    width: 100%;
+  }
+  #update-input {
+    padding: 2% 5%;
+  }
+  .input-btns {
+   
+    justify-content: space-between;
+  }
+  .input-btns button {
+    flex-grow: 1;
+    padding: auto;
   }
 }
 

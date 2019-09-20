@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(event) {
+document.addEventListener('DOMContentLoaded', () => {
   let today = new Date();
   let hours = today.getHours();
   let date = today.toLocaleDateString();
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const humidity = `${data.current.humidity}%`;
     const windDirection = data.current.wind_dir;
     const clouds = data.current.cloudcover;
-    const precipInch = `${data.current.precip}"`;
+    const precipInch = `${data.current.precip}in`;
     const precipMM = `${Math.floor(data.current.precip * 25.4)}mm`;
     const uv = `${data.current.uv_index}`;
     const windSpeedMph = `${data.current.wind_speed || 0}mph`;
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     let windSpeed = windSpeedMph;
     let feelsLike = feelsLikeF;
     let precip = precipInch;
-
+    
     const mainTemp = document.getElementById('temp');
 
     function setTempMeasurementState() {
@@ -88,13 +88,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
           .querySelector('.temp-container')
           .appendChild(
             addCondition
-          ).innerHTML = `<span id='condition-detail'>${condition}</span>
+          ).innerHTML = `<p id='condition-detail'>${condition}</p>
         <p>Cloud cover ${cloudCover}</p>
         <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} <span id="wind-speed">${windSpeed}</span></p>
         <p>Precip <span id="precip">${precip}</span> | Feels like <span id="feels-like">${feelsLike}</span></p>
         <p>UV index ${uv}</p>
-        <div>
-          <input type='text' id="update-input" /><button type='button' id="update">Update</button><button type='button' id='coords'>GPS</button>
+        <div class="location-input">
+          <input type='text' id="update-input" placeholder="Enter location details" />
+          <div class="input-btns">
+           <button type='button' id="update">Update Location</button><button type='button' id='coords' title='Use previously saved coordinates'>GPS</button>
+          </div>
         </div>`;
 
         document.getElementById('update').addEventListener('click', e => {
@@ -122,35 +125,33 @@ document.addEventListener('DOMContentLoaded', function(event) {
             setLocation = location;
             let condition = document.getElementById('condition');
             condition.remove();
-            getLocationWeather(setLocation);
+            // getLocationWeather(setLocation);
           }
         });
       },
       showClouds: function() {
-        let cloudIcon = "'wi wi-night-clear'";
+        let cloudIcon = 'wi wi-night-clear';
         let cloudIconElement = '';
-
-        // TODO: add switch statement
 
         if (clouds >= 0 && clouds < 15) {
           if (hours >= 21 || hours < 6) {
-            cloudIcon = "'wi wi-night-clear'";
+            cloudIcon = 'wi wi-night-clear';
           } else {
-            cloudIcon = "'wi wi-day-sunny'";
+            cloudIcon = 'wi wi-day-sunny';
           }
         } else if (clouds < 80 && clouds > 15) {
           if (hours >= 21 || hours < 6) {
-            cloudIcon = "'wi wi-night-alt-cloudy'";
+            cloudIcon = 'wi wi-night-alt-cloudy';
           } else {
-            cloudIcon = "'wi wi-day-cloudy'";
+            cloudIcon = 'wi wi-day-cloudy';
           }
         } else {
-          cloudIcon = "'wi wi-cloudy'";
+          cloudIcon = 'wi wi-cloudy';
         }
 
-        cloudIconElement = '<i class=' + cloudIcon + '></i>';
+        cloudIconElement = `<i class="${cloudIcon}"></i>`;
 
-        document.getElementById('cloudCoverage').innerHTML = cloudIconElement;
+        document.getElementById('cloud-coverage').innerHTML = cloudIconElement;
       },
       showTemp: function() {
         mainTemp.innerHTML = tempF;
@@ -181,64 +182,57 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let setBackground = condition.toLowerCase();
         let imagePath = '';
 
-        // TODO: add switch statement
-
-        if (['sunny', 'sunshine', 'clear'].indexOf(setBackground) >= 0) {
-          if (hours >= 21) {
-            imagePath = 'v1489707725/Starry-Night-Sky_arnoyo.jpg';
-          } else {
-            imagePath =
-              'c_crop,h_1080,q_94,x_0,y_0/v1489626233/dream_landscape-1920x1080_pq9zx0.jpg';
-          }
-        } else if (
-          ['cloudy', 'clouds', 'overcast', 'mostly cloudy'].indexOf(
-            setBackground
-          ) >= 0
-        ) {
-          if (hours >= 21) {
+        switch (setBackground.length > 0) {
+          case ['sunny', 'sunshine', 'clear'].includes(setBackground):  
+            if (hours >= 21) {
+              imagePath = 'v1489707725/Starry-Night-Sky_arnoyo.jpg';
+            } else {
+              imagePath =
+                'c_crop,h_1080,q_94,x_0,y_0/v1489626233/dream_landscape-1920x1080_pq9zx0.jpg';
+            }
+            break;
+          case ['cloudy', 'clouds', 'overcast', 'mostly cloudy'].includes(setBackground):
+             if (hours >= 21) {
             imagePath = 'v1490145601/211605391_782caa152f_o_psvlkd.jpg';
-          } else {
-            imagePath =
-              'v1489628714/England-scenery-fields-tree-cloudy-sky_1920x1200_zjihba.jpg';
-          }
-        } else if (
-          ['partly cloudy', 'partly sunny'].indexOf(setBackground) >= 0
-        ) {
-          if (hours >= 21) {
+            } else {
+              imagePath =
+                'v1489628714/England-scenery-fields-tree-cloudy-sky_1920x1200_zjihba.jpg';
+            }
+            break;
+          case ['partly cloudy', 'partly sunny'].includes(setBackground):
+            if (hours >= 21) {
             imagePath = 'v1490145601/211605391_782caa152f_o_psvlkd.jpg';
-          } else {
-            imagePath = 'v1490019539/ahoSK4_nd4vsz.jpg';
-          }
-        } else if (
-          ['rain', 'rainy', 'showers', 'light rain', 'heavy rain'].indexOf(
-            setBackground
-          ) >= 0
-        ) {
-          imagePath =
+            } else {
+              imagePath = 'v1490019539/ahoSK4_nd4vsz.jpg';
+            }
+            break;
+          case ['rain', 'showers', 'heavy rain'].includes(setBackground):
+            imagePath =
             'v1489789747/-_Heavy_rain_Dullness_Bad_weather_Wallpaper_Background_Ultra_HD_4K_phialf.jpg';
-        } else if (
-          ['storms', 'stormy', 'thunderstorms', 'thunder', 'lightning'].indexOf(
-            setBackground
-          ) >= 0
-        ) {
-          if (hours >= 21) {
+            break;
+          case ['light rain', 'rainy', 'some rain'].includes(setBackground):
+            imagePath = 'v1568992217/rain_light_c4diox.jpg';
+            break;
+          case ['storms', 'stormy', 'thunderstorms', 'thunder', 'lightning'].includes(setBackground):
+            if (hours >= 21) {
             imagePath =
               'v1489707239/fantastic-lightning-wallpaper-1942-2092-hd-wallpapers_teflue.jpg';
-          } else {
+            } else {
             imagePath =
               'v1490146875/39544132-free-thunderstorm-wallpapers_un1zrl.jpg';
-          }
-        } else if (
-          ['snow', 'snowy', 'snow storms', 'ice'].indexOf(setBackground) >= 0
-        ) {
-          imagePath =
+            }
+            break;
+          case ['snow', 'snowy', 'snow storms', 'ice'].includes(setBackground):
+            imagePath =
             'v1489707398/nature-seasons-winter-snow-wallpapers-1920x1200_tktbyd.jpg';
-        } else if (['mist', 'fog', 'patchy fog'].indexOf(setBackground) >= 0) {
-          imagePath = 'v1489839154/mist-wallpaper-9_vzq610.jpg';
-        } else {
-          imagePath = 'v1489708424/gradient-wallpaper-5_ixevmf.png';
+            break;
+          case ['mist', 'fog', 'patchy fog'].includes(setBackground):
+            imagePath = 'v1489839154/mist-wallpaper-9_vzq610.jpg';
+            break;
+          default:
+            imagePath = 'v1489708424/gradient-wallpaper-5_ixevmf.png';
         }
-
+        
         pageBackground.style.backgroundImage = `url${imageUrl}${imagePath}')`;
       },
       showGreeting: function() {
