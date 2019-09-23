@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let location = getLocation(setLocation);
     try {
       const data = await fetch(
-        `http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${location}&units=f`
+        `https://cors-anywhere.herokuapp.com/http://api.weatherstack.com/current?access_key=ef6a33e6d6213a6b9322e8e3501396d2&query=${location}&units=f`
       );
       const json = await data.json();
       getData(json);
