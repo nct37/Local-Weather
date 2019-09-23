@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let windSpeed = windSpeedMph;
     let feelsLike = feelsLikeF;
     let precip = precipInch;
-    
+
     const mainTemp = document.getElementById('temp');
 
     function setTempMeasurementState() {
@@ -88,17 +88,20 @@ document.addEventListener('DOMContentLoaded', () => {
           .querySelector('.temp-container')
           .appendChild(
             addCondition
-          ).innerHTML = `<p id='condition-detail'>${condition}</p>
-        <p>Cloud cover ${cloudCover}</p>
-        <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} <span id="wind-speed">${windSpeed}</span></p>
-        <p>Precip <span id="precip">${precip}</span> | Feels like <span id="feels-like">${feelsLike}</span></p>
-        <p>UV index ${uv}</p>
-        <div class="location-input">
-          <input type='text' id="update-input" placeholder="Enter location details" />
-          <div class="input-btns">
-           <button type='button' id="update">Update Location</button><button type='button' id='coords' title='Use previously saved coordinates'>GPS</button>
-          </div>
-        </div>`;
+          ).innerHTML = `<div class='condition-wrapper'>
+              <p id='condition-detail'>${condition}</p>
+              <p>Cloud cover ${cloudCover}</p>
+              <p>Humidity ${humidity} | Winds ${windDirection} ${windIcon} <span id="wind-speed">${windSpeed}</span></p>
+              <p>Precip <span id="precip">${precip}</span> | Feels like <span id="feels-like">${feelsLike}</span></p>
+              <p>UV index ${uv}</p>
+            </div>
+            <div class="location-input">
+              <input type='text' id="update-input" placeholder="Enter location details" />
+              <div class="input-btns">
+                <button type='button' id="update">Update Location</button><button type='button' id='coords' title='Use previously saved coordinates'>GPS</button>
+              </div>
+            </div>
+            `;
 
         document.getElementById('update').addEventListener('click', e => {
           e.preventDefault();
@@ -125,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setLocation = location;
             let condition = document.getElementById('condition');
             condition.remove();
-            // getLocationWeather(setLocation);
+            getLocationWeather(setLocation);
           }
         });
       },
@@ -183,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let imagePath = '';
 
         switch (setBackground.length > 0) {
-          case ['sunny', 'sunshine', 'clear'].includes(setBackground):  
+          case ['sunny', 'sunshine', 'clear'].includes(setBackground):
             if (hours >= 21) {
               imagePath = 'v1489707725/Starry-Night-Sky_arnoyo.jpg';
             } else {
@@ -191,9 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 'c_crop,h_1080,q_94,x_0,y_0/v1489626233/dream_landscape-1920x1080_pq9zx0.jpg';
             }
             break;
-          case ['cloudy', 'clouds', 'overcast', 'mostly cloudy'].includes(setBackground):
-             if (hours >= 21) {
-            imagePath = 'v1490145601/211605391_782caa152f_o_psvlkd.jpg';
+          case ['cloudy', 'clouds', 'overcast', 'mostly cloudy'].includes(
+            setBackground
+          ):
+            if (hours >= 21) {
+              imagePath = 'v1490145601/211605391_782caa152f_o_psvlkd.jpg';
             } else {
               imagePath =
                 'v1489628714/England-scenery-fields-tree-cloudy-sky_1920x1200_zjihba.jpg';
@@ -201,30 +206,36 @@ document.addEventListener('DOMContentLoaded', () => {
             break;
           case ['partly cloudy', 'partly sunny'].includes(setBackground):
             if (hours >= 21) {
-            imagePath = 'v1490145601/211605391_782caa152f_o_psvlkd.jpg';
+              imagePath = 'v1490145601/211605391_782caa152f_o_psvlkd.jpg';
             } else {
               imagePath = 'v1490019539/ahoSK4_nd4vsz.jpg';
             }
             break;
           case ['rain', 'showers', 'heavy rain'].includes(setBackground):
             imagePath =
-            'v1489789747/-_Heavy_rain_Dullness_Bad_weather_Wallpaper_Background_Ultra_HD_4K_phialf.jpg';
+              'v1489789747/-_Heavy_rain_Dullness_Bad_weather_Wallpaper_Background_Ultra_HD_4K_phialf.jpg';
             break;
           case ['light rain', 'rainy', 'some rain'].includes(setBackground):
             imagePath = 'v1568992217/rain_light_c4diox.jpg';
             break;
-          case ['storms', 'stormy', 'thunderstorms', 'thunder', 'lightning'].includes(setBackground):
+          case [
+            'storms',
+            'stormy',
+            'thunderstorms',
+            'thunder',
+            'lightning',
+          ].includes(setBackground):
             if (hours >= 21) {
-            imagePath =
-              'v1489707239/fantastic-lightning-wallpaper-1942-2092-hd-wallpapers_teflue.jpg';
+              imagePath =
+                'v1489707239/fantastic-lightning-wallpaper-1942-2092-hd-wallpapers_teflue.jpg';
             } else {
-            imagePath =
-              'v1490146875/39544132-free-thunderstorm-wallpapers_un1zrl.jpg';
+              imagePath =
+                'v1490146875/39544132-free-thunderstorm-wallpapers_un1zrl.jpg';
             }
             break;
           case ['snow', 'snowy', 'snow storms', 'ice'].includes(setBackground):
             imagePath =
-            'v1489707398/nature-seasons-winter-snow-wallpapers-1920x1200_tktbyd.jpg';
+              'v1489707398/nature-seasons-winter-snow-wallpapers-1920x1200_tktbyd.jpg';
             break;
           case ['mist', 'fog', 'patchy fog'].includes(setBackground):
             imagePath = 'v1489839154/mist-wallpaper-9_vzq610.jpg';
@@ -232,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
           default:
             imagePath = 'v1489708424/gradient-wallpaper-5_ixevmf.png';
         }
-        
+
         pageBackground.style.backgroundImage = `url${imageUrl}${imagePath}')`;
       },
       showGreeting: function() {
